@@ -65,12 +65,12 @@
           <div class="btn-badge green" aria-hidden="true" id="cart-count">0</div>
         </button>
 
-        <button class="header-action-btn">
+        <button class="header-action-btn" id="favorites-btn" onclick="openFavorites()">
           <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
 
           <p class="header-action-label">Favoritos</p>
 
-          <div class="btn-badge" aria-hidden="true">2</div>
+          <div class="btn-badge" aria-hidden="true" id="favorites-count">0</div>
         </button>
 
       </div>
@@ -268,6 +268,12 @@
                       <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
 
                       <p>Adicionar ao Carrinho</p>
+                    </button>
+
+                    <button class="card-action-btn favorite-btn" onclick="addToFavorites('Varsi Leather Bag', '48.75', './assets/images/product-1.jpg')">
+                      <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
+
+                      <p>Favoritar</p>
                     </button>
 
                     <button class="card-action-btn" aria-label="Add to Whishlist">
@@ -854,7 +860,28 @@
 
 
 
-      <!-- 
+      <!-- Favorites overlay and sidebar -->
+  <div class="favorites-overlay" id="favorites-overlay" onclick="closeFavorites()"></div>
+  <div class="favorites-sidebar" id="favorites-sidebar">
+    <div class="favorites-header">
+      <h2 class="favorites-title">Lista de Favoritos</h2>
+      <button class="favorites-close-btn" onclick="closeFavorites()">
+        <ion-icon name="close-outline"></ion-icon>
+      </button>
+    </div>
+    
+    <div class="favorites-content">
+      <div class="favorites-section-header">
+        <h3 class="favorites-section-title">Meus favoritos</h3>
+      </div>
+      
+      <div class="favorites-items" id="favorites-items">
+        <!-- Favorites items will be dynamically added here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 
     - custom js link
   -->
       <script src="./assets/js/script.js"></script>

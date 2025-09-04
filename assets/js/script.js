@@ -156,7 +156,128 @@ function showAddToCartFeedback(productName) {
   }, 2000);
 }
 
-// Initialize cart count when page loads
+/**
+ * Favorites functionality
+ */
+
+let favorites = JSON.parse(localStorage.getItem('favoritesList')) || [];
+
+function updateFavoritesCount() {
+  const favoritesCount = document.getElementById('favorites-count');
+  if (favoritesCount) {
+    favoritesCount.textContent = favorites.length;
+  }
+}
+
+function openFavorites() {
+  const favoritesOverlay = document.getElementById('favorites-overlay');
+  const favoritesSidebar = document.getElementById('favorites-sidebar');
+  
+  if (favoritesOverlay && favoritesSidebar) {
+    favoritesOverlay.classList.add('active');
+    favoritesSidebar.classList.add('active');
+    renderFavoritesItems();
+  }
+}
+
+function closeFavorites() {
+  const favoritesOverlay = document.getElementById('favorites-overlay');
+  const favoritesSidebar = document.getElementById('favorites-sidebar');
+  
+  if (favoritesOverlay && favoritesSidebar) {
+    favoritesOverlay.classList.remove('active');
+    favoritesSidebar.classList.remove('active');
+  }
+}
+
+function addToFavorites(name, price, image) {
+  const existingItem = favorites.find(item => item.name === name);
+  
+  if (!existingItem) {
+    favorites.push({
+      name: name,
+      price: parseFloat(price),
+      image: image
+    });
+    
+    localStorage.setItem('favoritesList', JSON.stringify(favorites));
+    updateFavoritesCount();
+    showAddToFavoritesFeedback(name);
+  }
+}
+
+function removeFromFavorites(index) {
+  favorites.splice(index, 1);
+  localStorage.setItem('favoritesList', JSON.stringify(favorites));
+  updateFavoritesCount();
+  renderFavoritesItems();
+}
+
+function renderFavoritesItems() {
+  const favoritesItems = document.getElementById('favorites-items');
+  
+  if (!favoritesItems) return;
+  
+  if (favorites.length === 0) {
+    favoritesItems.innerHTML = '<div class="empty-favorites">Sua lista de favoritos está vazia</div>';
+  } else {
+    favoritesItems.innerHTML = favorites.map((item, index) => {
+      return `
+        <div class="favorites-item">
+          <img src="${item.image}" alt="${item.name}" class="favorites-item-image">
+          <div class="favorites-item-details">
+            <h4 class="favorites-item-name">${item.name}</h4>
+            <p class="favorites-item-price">R$ ${item.price.toFixed(2).replace('.', ',')}<sup>99</sup></p>
+            <p class="favorites-item-installment">em 12x sem juros</p>
+            <button class="add-to-cart-from-favorites" onclick="addToCartFromFavorites('${item.name}', '${item.price}', '${item.image}')">
+              Adicionar ao Carrinho
+            </button>
+          </div>
+          <button class="remove-favorite-btn" onclick="removeFromFavorites(${index})">Excluir</button>
+        </div>
+      `;
+    }).join('');
+  }
+}
+
+function addToCartFromFavorites(name, price, image) {
+  // Add to cart first
+  addToCart(name, price, image);
+  
+  // Find and remove from favorites
+  const itemIndex = favorites.findIndex(item => item.name === name);
+  if (itemIndex !== -1) {
+    favorites.splice(itemIndex, 1);
+    localStorage.setItem('favoritesList', JSON.stringify(favorites));
+    updateFavoritesCount();
+    renderFavoritesItems();
+  }
+}
+
+function showAddToFavoritesFeedback(productName) {
+  const feedback = document.createElement('div');
+  feedback.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #FFD700;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 5px;
+    z-index: 10000;
+    font-family: var(--ff-jost);
+  `;
+  feedback.textContent = `${productName} adicionado aos favoritos!`;
+  
+  document.body.appendChild(feedback);
+  
+  setTimeout(() => {
+    document.body.removeChild(feedback);
+  }, 2000);
+}
+
+// Initialize cart count and favorites count when page loads
 document.addEventListener('DOMContentLoaded', function() {
   updateCartCount();
+  updateFavoritesCount();
 });
