@@ -49,8 +49,10 @@ function openCart() {
   const shoppingCart = document.getElementById('shopping-cart');
   
   if (cartOverlay && shoppingCart) {
-    cartOverlay.classList.add('active');
-    shoppingCart.classList.add('active');
+    cartOverlay.classList.remove('opacity-0', 'pointer-events-none');
+    cartOverlay.classList.add('opacity-100');
+    shoppingCart.classList.remove('translate-x-full');
+    shoppingCart.classList.add('translate-x-0');
     renderCartItems();
   }
 }
@@ -60,8 +62,10 @@ function closeCart() {
   const shoppingCart = document.getElementById('shopping-cart');
   
   if (cartOverlay && shoppingCart) {
-    cartOverlay.classList.remove('active');
-    shoppingCart.classList.remove('active');
+    cartOverlay.classList.add('opacity-0', 'pointer-events-none');
+    cartOverlay.classList.remove('opacity-100');
+    shoppingCart.classList.add('translate-x-full');
+    shoppingCart.classList.remove('translate-x-0');
   }
 }
 
@@ -100,7 +104,7 @@ function renderCartItems() {
   if (!cartItems || !cartTotal) return;
   
   if (cart.length === 0) {
-    cartItems.innerHTML = '<div class="empty-cart">Seu carrinho está vazio</div>';
+    cartItems.innerHTML = '<div class="text-center py-8 text-gray-500">Seu carrinho está vazio</div>';
     cartTotal.textContent = 'R$ 0,00';
     // Don't return - let the footer still render
   } else {
@@ -110,15 +114,15 @@ function renderCartItems() {
   cartItems.innerHTML = cart.map((item, index) => {
     totalPrice += item.price * item.quantity;
     return `
-      <div class="cart-item">
-        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
-        <div class="cart-item-details">
-          <h4 class="cart-item-name">${item.name}</h4>
-          <p class="cart-item-price">R$ ${item.price.toFixed(2).replace('.', ',')}</p>
-          <p class="cart-item-payment">Em até 12x sem juros no Crédito ou Cartão de Débito ou Pix</p>
+      <div class="bg-gray-50 rounded-lg p-4 flex gap-4 items-center">
+        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg flex-shrink-0">
+        <div class="flex-1 min-w-0">
+          <h4 class="font-medium text-gray-800 text-sm leading-tight">${item.name}</h4>
+          <p class="font-semibold text-gray-900 mt-1">R$ ${item.price.toFixed(2).replace('.', ',')}</p>
+          <p class="text-xs text-gray-500 mt-1">Em até 12x sem juros no Crédito ou Cartão de Débito ou Pix</p>
         </div>
-        <div class="cart-item-actions">
-          <button class="remove-item-btn" onclick="removeFromCart(${index})">Excluir</button>
+        <div class="flex-shrink-0">
+          <button class="text-blue-500 hover:text-blue-700 text-sm font-medium transition-colors" onclick="removeFromCart(${index})">Excluir</button>
         </div>
       </div>
     `;
