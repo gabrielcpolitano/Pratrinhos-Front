@@ -151,7 +151,7 @@ function showAddToCartFeedback(productName) {
     z-index: 10000;
     font-family: var(--ff-jost);
   `;
-  feedback.textContent = `${productName} adicionado ao carrinho!`;
+  feedback.textContent = `Adicionado ao Carrinho!`;
   
   document.body.appendChild(feedback);
   
@@ -291,7 +291,7 @@ function showAddToFavoritesFeedback(productName) {
     z-index: 10000;
     font-family: var(--ff-jost);
   `;
-  feedback.textContent = `${productName} adicionado aos favoritos!`;
+  feedback.textContent = `Adicionado aos Favoritos!`;
   
   document.body.appendChild(feedback);
   
