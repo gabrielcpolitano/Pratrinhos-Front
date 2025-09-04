@@ -57,12 +57,12 @@
           <p class="header-action-label">Buscar</p>
         </button>
 
-        <button class="header-action-btn">
+        <button class="header-action-btn" id="cart-btn" onclick="openCart()">
           <ion-icon name="cart-outline" aria-hidden="true"></ion-icon>
 
           <p class="header-action-label">Cart</p>
 
-          <div class="btn-badge green" aria-hidden="true">3</div>
+          <div class="btn-badge green" aria-hidden="true" id="cart-count">0</div>
         </button>
 
         <button class="header-action-btn">
@@ -117,9 +117,37 @@
     </div>
   </header>
 
-
-
-
+  <!-- 
+    - #SHOPPING CART
+  -->
+  <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+  <div class="shopping-cart" id="shopping-cart">
+    <div class="cart-header">
+      <button class="cart-back-btn" onclick="closeCart()">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </button>
+      <h2 class="cart-title">Carrinho de compras</h2>
+    </div>
+    
+    <div class="cart-content">
+      <div class="cart-products-section">
+        <h3 class="cart-section-title">Produto</h3>
+        <div class="cart-items" id="cart-items">
+          <!-- Cart items will be dynamically added here -->
+        </div>
+      </div>
+      
+      <div class="cart-footer">
+        <div class="cart-total">
+          <span class="total-label">Total</span>
+          <span class="total-price" id="cart-total">R$ 0,00</span>
+        </div>
+        <button class="continue-shopping-btn" onclick="continueShopping()">
+          Continuar a compra
+        </button>
+      </div>
+    </div>
+  </div>
 
   <main>
     <article>
@@ -236,10 +264,10 @@
                   <div class="card-actions">
 
 
-                    <button class="card-action-btn cart-btn">
+                    <button class="card-action-btn cart-btn" onclick="addToCart('Varsi Leather Bag', '48.75', './assets/images/product-1.jpg')">
                       <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
 
-                      <p>Adiconar ao Carrinho</p>
+                      <p>Adicionar ao Carrinho</p>
                     </button>
 
                     <button class="card-action-btn" aria-label="Add to Whishlist">
@@ -276,10 +304,10 @@
 
                   <div class="card-actions">
 
-                    <button class="card-action-btn cart-btn">
+                    <button class="card-action-btn cart-btn" onclick="addToCart('Fit Twill Shirt for Woman', '48.75', './assets/images/product-2.jpg')">
                       <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
 
-                      <p>Add to Cart</p>
+                      <p>Adicionar ao Carrinho</p>
                     </button>
 
                     <button class="card-action-btn" aria-label="Add to Whishlist">
@@ -316,10 +344,10 @@
 
                   <div class="card-actions">
 
-                    <button class="card-action-btn cart-btn">
+                    <button class="card-action-btn cart-btn" onclick="addToCart('Fit Twill Shirt for Woman', '48.75', './assets/images/product-2.jpg')">
                       <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
 
-                      <p>Add to Cart</p>
+                      <p>Adicionar ao Carrinho</p>
                     </button>
 
                     <button class="card-action-btn" aria-label="Add to Whishlist">
@@ -356,10 +384,10 @@
 
                   <div class="card-actions">
 
-                    <button class="card-action-btn cart-btn">
+                    <button class="card-action-btn cart-btn" onclick="addToCart('Fit Twill Shirt for Woman', '48.75', './assets/images/product-2.jpg')">
                       <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
 
-                      <p>Add to Cart</p>
+                      <p>Adicionar ao Carrinho</p>
                     </button>
 
                     <button class="card-action-btn" aria-label="Add to Whishlist">
@@ -397,10 +425,10 @@
                   <div class="card-actions">
 
 
-                    <button class="card-action-btn cart-btn">
+                    <button class="card-action-btn cart-btn" onclick="addToCart('Fit Twill Shirt for Woman', '48.75', './assets/images/product-2.jpg')">
                       <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
 
-                      <p>Add to Cart</p>
+                      <p>Adicionar ao Carrinho</p>
                     </button>
 
                     <button class="card-action-btn" aria-label="Add to Whishlist">
@@ -437,10 +465,10 @@
 
                   <div class="card-actions">
 
-                    <button class="card-action-btn cart-btn">
+                    <button class="card-action-btn cart-btn" onclick="addToCart('Fit Twill Shirt for Woman', '48.75', './assets/images/product-2.jpg')">
                       <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
 
-                      <p>Add to Cart</p>
+                      <p>Adicionar ao Carrinho</p>
                     </button>
 
                     <button class="card-action-btn" aria-label="Add to Whishlist">
@@ -478,10 +506,10 @@
                   <div class="card-actions">
 
 
-                    <button class="card-action-btn cart-btn">
+                    <button class="card-action-btn cart-btn" onclick="addToCart('Fit Twill Shirt for Woman', '48.75', './assets/images/product-2.jpg')">
                       <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
 
-                      <p>Add to Cart</p>
+                      <p>Adicionar ao Carrinho</p>
                     </button>
 
                     <button class="card-action-btn" aria-label="Add to Whishlist">
@@ -518,10 +546,10 @@
 
                   <div class="card-actions">
 
-                    <button class="card-action-btn cart-btn">
+                    <button class="card-action-btn cart-btn" onclick="addToCart('Fit Twill Shirt for Woman', '48.75', './assets/images/product-2.jpg')">
                       <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
 
-                      <p>Add to Cart</p>
+                      <p>Adicionar ao Carrinho</p>
                     </button>
 
                     <button class="card-action-btn" aria-label="Add to Whishlist">
@@ -559,10 +587,10 @@
                   <div class="card-actions">
 
 
-                    <button class="card-action-btn cart-btn">
+                    <button class="card-action-btn cart-btn" onclick="addToCart('Fit Twill Shirt for Woman', '48.75', './assets/images/product-2.jpg')">
                       <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
 
-                      <p>Add to Cart</p>
+                      <p>Adicionar ao Carrinho</p>
                     </button>
 
                     <button class="card-action-btn" aria-label="Add to Whishlist">
@@ -600,10 +628,10 @@
                   <div class="card-actions">
 
 
-                    <button class="card-action-btn cart-btn">
+                    <button class="card-action-btn cart-btn" onclick="addToCart('Fit Twill Shirt for Woman', '48.75', './assets/images/product-2.jpg')">
                       <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
 
-                      <p>Add to Cart</p>
+                      <p>Adicionar ao Carrinho</p>
                     </button>
 
                     <button class="card-action-btn" aria-label="Add to Whishlist">

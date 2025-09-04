@@ -30,3 +30,133 @@ window.addEventListener("scroll", function () {
   window.scrollY >= 200 ? header.classList.add("active")
     : header.classList.remove("active");
 })
+
+/**
+ * Shopping Cart functionality
+ */
+
+let cart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+
+function updateCartCount() {
+  const cartCount = document.getElementById('cart-count');
+  if (cartCount) {
+    cartCount.textContent = cart.length;
+  }
+}
+
+function openCart() {
+  const cartOverlay = document.getElementById('cart-overlay');
+  const shoppingCart = document.getElementById('shopping-cart');
+  
+  if (cartOverlay && shoppingCart) {
+    cartOverlay.classList.add('active');
+    shoppingCart.classList.add('active');
+    renderCartItems();
+  }
+}
+
+function closeCart() {
+  const cartOverlay = document.getElementById('cart-overlay');
+  const shoppingCart = document.getElementById('shopping-cart');
+  
+  if (cartOverlay && shoppingCart) {
+    cartOverlay.classList.remove('active');
+    shoppingCart.classList.remove('active');
+  }
+}
+
+function addToCart(name, price, image) {
+  const existingItem = cart.find(item => item.name === name);
+  
+  if (existingItem) {
+    existingItem.quantity += 1;
+  } else {
+    cart.push({
+      name: name,
+      price: parseFloat(price),
+      image: image,
+      quantity: 1
+    });
+  }
+  
+  localStorage.setItem('shoppingCart', JSON.stringify(cart));
+  updateCartCount();
+  
+  // Show success feedback
+  showAddToCartFeedback(name);
+}
+
+function removeFromCart(index) {
+  cart.splice(index, 1);
+  localStorage.setItem('shoppingCart', JSON.stringify(cart));
+  updateCartCount();
+  renderCartItems();
+}
+
+function renderCartItems() {
+  const cartItems = document.getElementById('cart-items');
+  const cartTotal = document.getElementById('cart-total');
+  
+  if (!cartItems || !cartTotal) return;
+  
+  if (cart.length === 0) {
+    cartItems.innerHTML = '<div class="empty-cart">Seu carrinho está vazio</div>';
+    cartTotal.textContent = 'R$ 0,00';
+    // Don't return - let the footer still render
+  } else {
+  
+  let totalPrice = 0;
+  
+  cartItems.innerHTML = cart.map((item, index) => {
+    totalPrice += item.price * item.quantity;
+    return `
+      <div class="cart-item">
+        <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+        <div class="cart-item-details">
+          <h4 class="cart-item-name">${item.name}</h4>
+          <p class="cart-item-price">R$ ${item.price.toFixed(2).replace('.', ',')}</p>
+          <p class="cart-item-payment">Em até 12x sem juros no Crédito ou Cartão de Débito ou Pix</p>
+        </div>
+        <div class="cart-item-actions">
+          <button class="remove-item-btn" onclick="removeFromCart(${index})">Excluir</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+  
+  cartTotal.textContent = `R$ ${totalPrice.toFixed(2).replace('.', ',')}`;
+  }
+}
+
+function continueShopping() {
+  alert('Redirecionando para o checkout...');
+  closeCart();
+}
+
+function showAddToCartFeedback(productName) {
+  // Simple feedback - you could make this more sophisticated
+  const feedback = document.createElement('div');
+  feedback.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #27AE60;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    z-index: 10000;
+    font-family: var(--ff-jost);
+  `;
+  feedback.textContent = `${productName} adicionado ao carrinho!`;
+  
+  document.body.appendChild(feedback);
+  
+  setTimeout(() => {
+    document.body.removeChild(feedback);
+  }, 2000);
+}
+
+// Initialize cart count when page loads
+document.addEventListener('DOMContentLoaded', function() {
+  updateCartCount();
+});
