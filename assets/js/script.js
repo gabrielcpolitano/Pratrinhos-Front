@@ -157,7 +157,7 @@ function showAddToCartFeedback(productName) {
   
   setTimeout(() => {
     document.body.removeChild(feedback);
-  }, 2000);
+  }, 500);
 }
 
 /**
@@ -297,7 +297,7 @@ function showAddToFavoritesFeedback(productName) {
   
   setTimeout(() => {
     document.body.removeChild(feedback);
-  }, 2000);
+  }, 500);
 }
 
 /**
