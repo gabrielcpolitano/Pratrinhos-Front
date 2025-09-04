@@ -190,20 +190,34 @@ function closeFavorites() {
   }
 }
 
-function addToFavorites(name, price, image) {
+function isProductInFavorites(productName) {
+  return favorites.some(item => item.name === productName);
+}
+
+function toggleFavorite(name, price, image) {
   const existingItem = favorites.find(item => item.name === name);
   
-  if (!existingItem) {
+  if (existingItem) {
+    // Remove from favorites
+    const itemIndex = favorites.findIndex(item => item.name === name);
+    favorites.splice(itemIndex, 1);
+  } else {
+    // Add to favorites
     favorites.push({
       name: name,
       price: parseFloat(price),
       image: image
     });
-    
-    localStorage.setItem('favoritesList', JSON.stringify(favorites));
-    updateFavoritesCount();
     showAddToFavoritesFeedback(name);
   }
+  
+  localStorage.setItem('favoritesList', JSON.stringify(favorites));
+  updateFavoritesCount();
+  renderProducts(); // Re-render to update heart icons
+}
+
+function addToFavorites(name, price, image) {
+  toggleFavorite(name, price, image);
 }
 
 function removeFromFavorites(index) {
@@ -251,6 +265,7 @@ function addToCartFromFavorites(name, price, image) {
     localStorage.setItem('favoritesList', JSON.stringify(favorites));
     updateFavoritesCount();
     renderFavoritesItems();
+    renderProducts(); // Update heart icons on main page
   }
 }
 
@@ -276,8 +291,75 @@ function showAddToFavoritesFeedback(productName) {
   }, 2000);
 }
 
-// Initialize cart count and favorites count when page loads
+/**
+ * Dynamic Products Loading
+ */
+
+let productsData = [];
+
+async function loadProducts() {
+  try {
+    const response = await fetch('./assets/products.json');
+    const data = await response.json();
+    productsData = data.products;
+    renderProducts();
+  } catch (error) {
+    console.error('Erro ao carregar produtos:', error);
+    // Fallback - show error message
+    const container = document.getElementById('products-container');
+    if (container) {
+      container.innerHTML = '<li class="error-message">Erro ao carregar produtos. Tente novamente.</li>';
+    }
+  }
+}
+
+function renderProducts() {
+  const container = document.getElementById('products-container');
+  if (!container || productsData.length === 0) return;
+
+  container.innerHTML = productsData.map(product => {
+    const isFavorited = isProductInFavorites(product.name);
+    const heartIcon = isFavorited ? 'heart' : 'heart-outline';
+    
+    return `
+    <li>
+      <div class="product-card">
+        <figure class="card-banner">
+          <a href="#">
+            <img src="${product.image}" alt="${product.name}" loading="lazy" width="800" height="1034" class="w-100">
+          </a>
+
+          <div class="card-actions">
+            <button class="card-action-btn cart-btn" onclick="addToCart('${product.name}', '${product.price}', '${product.image}')">
+              <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
+              <p>Adicionar ao Carrinho</p>
+            </button>
+
+            <button class="card-action-btn favorite-btn" onclick="addToFavorites('${product.name}', '${product.price}', '${product.image}')">
+              <ion-icon name="${heartIcon}" aria-hidden="true"></ion-icon>
+            </button>
+          </div>
+        </figure>
+
+        <div class="card-content">
+          <h3 class="h4 card-title">
+            <a href="#">${product.name}</a>
+          </h3>
+
+          <div class="card-price">
+            <data value="${product.price}">R$ ${product.price.toFixed(2).replace('.', ',')}</data>
+            <data>Em até 12x sem juros</data>
+          </div>
+        </div>
+      </div>
+    </li>
+  `;
+  }).join('');
+}
+
+// Initialize cart count, favorites count and load products when page loads
 document.addEventListener('DOMContentLoaded', function() {
   updateCartCount();
   updateFavoritesCount();
+  loadProducts();
 });
