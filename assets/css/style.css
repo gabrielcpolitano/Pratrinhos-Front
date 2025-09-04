@@ -583,7 +583,6 @@ h3 > a { color: inherit; }
 .product-card .card-price data:not(:first-child) {
   color: var(--sonic-silver);
   margin-left: 5px;
-  text-decoration: line-through;
 }
 
 .product .btn { margin-inline: auto; }
