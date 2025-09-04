@@ -453,18 +453,19 @@
 
 
             <!-- Favorites overlay and sidebar -->
-        <div class="favorites-overlay" id="favorites-overlay" onclick="closeFavorites()"></div>
-        <div class="favorites-sidebar" id="favorites-sidebar">
-          <div class="favorites-header">
-            <h2 class="favorites-title">Lista de Favoritos</h2>
-            <button class="favorites-close-btn" onclick="closeFavorites()">
+        <div class="fixed inset-0 bg-black bg-opacity-50 opacity-0 pointer-events-none transition-opacity duration-300 z-40" id="favorites-overlay" onclick="closeFavorites()"></div>
+        <div class="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl transform translate-x-full transition-transform duration-300 z-50 flex flex-col" id="favorites-sidebar">
+          <!-- Header -->
+          <div class="bg-yellow-400 px-6 py-4 flex items-center justify-between sticky top-0 z-10">
+            <h2 class="text-xl font-semibold text-black">Lista de Favoritos</h2>
+            <button class="text-black text-2xl hover:bg-yellow-500 p-2 rounded-full transition-colors" onclick="closeFavorites()">
               <ion-icon name="close-outline"></ion-icon>
             </button>
           </div>
 
-          <div class="favorites-content">
-
-            <div class="favorites-items" id="favorites-items">
+          <!-- Content -->
+          <div class="flex-1 px-6 py-4 overflow-y-auto">
+            <div class="space-y-4" id="favorites-items">
               <!-- Favorites items will be dynamically added here -->
             </div>
           </div>
@@ -481,6 +482,5 @@
             <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
             <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
-      </body>
-
-      </html>
+  </body>
+</html>

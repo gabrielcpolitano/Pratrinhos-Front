@@ -47,7 +47,7 @@ function updateCartCount() {
 function openCart() {
   const cartOverlay = document.getElementById('cart-overlay');
   const shoppingCart = document.getElementById('shopping-cart');
-  
+
   if (cartOverlay && shoppingCart) {
     cartOverlay.classList.remove('opacity-0', 'pointer-events-none');
     cartOverlay.classList.add('opacity-100');
@@ -60,7 +60,7 @@ function openCart() {
 function closeCart() {
   const cartOverlay = document.getElementById('cart-overlay');
   const shoppingCart = document.getElementById('shopping-cart');
-  
+
   if (cartOverlay && shoppingCart) {
     cartOverlay.classList.add('opacity-0', 'pointer-events-none');
     cartOverlay.classList.remove('opacity-100');
@@ -71,7 +71,7 @@ function closeCart() {
 
 function addToCart(name, price, image) {
   const existingItem = cart.find(item => item.name === name);
-  
+
   if (existingItem) {
     existingItem.quantity += 1;
   } else {
@@ -82,10 +82,10 @@ function addToCart(name, price, image) {
       quantity: 1
     });
   }
-  
+
   localStorage.setItem('shoppingCart', JSON.stringify(cart));
   updateCartCount();
-  
+
   // Show success feedback
   showAddToCartFeedback(name);
 }
@@ -100,20 +100,20 @@ function removeFromCart(index) {
 function renderCartItems() {
   const cartItems = document.getElementById('cart-items');
   const cartTotal = document.getElementById('cart-total');
-  
+
   if (!cartItems || !cartTotal) return;
-  
+
   if (cart.length === 0) {
     cartItems.innerHTML = '<div class="text-center py-8 text-gray-500">Seu carrinho está vazio</div>';
     cartTotal.textContent = 'R$ 0,00';
     // Don't return - let the footer still render
   } else {
-  
-  let totalPrice = 0;
-  
-  cartItems.innerHTML = cart.map((item, index) => {
-    totalPrice += item.price * item.quantity;
-    return `
+
+    let totalPrice = 0;
+
+    cartItems.innerHTML = cart.map((item, index) => {
+      totalPrice += item.price * item.quantity;
+      return `
       <div class="bg-gray-50 rounded-lg p-4 flex gap-4 items-center">
         <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg flex-shrink-0">
         <div class="flex-1 min-w-0">
@@ -126,9 +126,9 @@ function renderCartItems() {
         </div>
       </div>
     `;
-  }).join('');
-  
-  cartTotal.textContent = `R$ ${totalPrice.toFixed(2).replace('.', ',')}`;
+    }).join('');
+
+    cartTotal.textContent = `R$ ${totalPrice.toFixed(2).replace('.', ',')}`;
   }
 }
 
@@ -152,9 +152,9 @@ function showAddToCartFeedback(productName) {
     font-family: var(--ff-jost);
   `;
   feedback.textContent = `${productName} adicionado ao carrinho!`;
-  
+
   document.body.appendChild(feedback);
-  
+
   setTimeout(() => {
     document.body.removeChild(feedback);
   }, 2000);
@@ -176,10 +176,12 @@ function updateFavoritesCount() {
 function openFavorites() {
   const favoritesOverlay = document.getElementById('favorites-overlay');
   const favoritesSidebar = document.getElementById('favorites-sidebar');
-  
+
   if (favoritesOverlay && favoritesSidebar) {
-    favoritesOverlay.classList.add('active');
-    favoritesSidebar.classList.add('active');
+    favoritesOverlay.classList.remove('opacity-0', 'pointer-events-none');
+    favoritesOverlay.classList.add('opacity-100');
+    favoritesSidebar.classList.remove('translate-x-full');
+    favoritesSidebar.classList.add('translate-x-0');
     renderFavoritesItems();
   }
 }
@@ -187,10 +189,12 @@ function openFavorites() {
 function closeFavorites() {
   const favoritesOverlay = document.getElementById('favorites-overlay');
   const favoritesSidebar = document.getElementById('favorites-sidebar');
-  
+
   if (favoritesOverlay && favoritesSidebar) {
-    favoritesOverlay.classList.remove('active');
-    favoritesSidebar.classList.remove('active');
+    favoritesOverlay.classList.add('opacity-0', 'pointer-events-none');
+    favoritesOverlay.classList.remove('opacity-100');
+    favoritesSidebar.classList.add('translate-x-full');
+    favoritesSidebar.classList.remove('translate-x-0');
   }
 }
 
@@ -200,7 +204,7 @@ function isProductInFavorites(productName) {
 
 function toggleFavorite(name, price, image) {
   const existingItem = favorites.find(item => item.name === name);
-  
+
   if (existingItem) {
     // Remove from favorites
     const itemIndex = favorites.findIndex(item => item.name === name);
@@ -214,7 +218,7 @@ function toggleFavorite(name, price, image) {
     });
     showAddToFavoritesFeedback(name);
   }
-  
+
   localStorage.setItem('favoritesList', JSON.stringify(favorites));
   updateFavoritesCount();
   renderProducts(); // Re-render to update heart icons
@@ -233,25 +237,25 @@ function removeFromFavorites(index) {
 
 function renderFavoritesItems() {
   const favoritesItems = document.getElementById('favorites-items');
-  
+
   if (!favoritesItems) return;
-  
+
   if (favorites.length === 0) {
-    favoritesItems.innerHTML = '<div class="empty-favorites">Sua lista de favoritos está vazia</div>';
+    favoritesItems.innerHTML = '<div class="text-center py-8 text-gray-500">Sua lista de favoritos está vazia</div>';
   } else {
     favoritesItems.innerHTML = favorites.map((item, index) => {
       return `
-        <div class="favorites-item">
-          <img src="${item.image}" alt="${item.name}" class="favorites-item-image">
-          <div class="favorites-item-details">
-            <h4 class="favorites-item-name">${item.name}</h4>
-            <p class="favorites-item-price">R$ ${item.price.toFixed(2).replace('.', ',')}<sup>99</sup></p>
-            <p class="favorites-item-installment">em 12x sem juros</p>
-            <button class="add-to-cart-from-favorites" onclick="addToCartFromFavorites('${item.name}', '${item.price}', '${item.image}')">
+        <div class="bg-white border border-gray-200 rounded-lg p-4 flex gap-4 shadow-sm">
+          <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded-lg flex-shrink-0">
+          <div class="flex-1 min-w-0">
+            <h4 class="font-semibold text-gray-800 text-sm leading-tight mb-2">${item.name}</h4>
+            <p class="text-lg font-bold text-gray-900 mb-1">R$ ${item.price.toFixed(2).replace('.', ',')}<sup class="text-xs">99</sup></p>
+            <p class="text-xs text-green-600 mb-3">em 12x sem juros</p>
+            <button class="bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium py-2 px-4 rounded-lg transition-colors w-full mb-2" onclick="addToCartFromFavorites('${item.name}', '${item.price}', '${item.image}')">
               Adicionar ao Carrinho
             </button>
           </div>
-          <button class="remove-favorite-btn" onclick="removeFromFavorites(${index})">Excluir</button>
+          <button class="text-red-500 hover:text-red-700 text-sm font-medium h-fit" onclick="removeFromFavorites(${index})">Excluir</button>
         </div>
       `;
     }).join('');
@@ -261,7 +265,7 @@ function renderFavoritesItems() {
 function addToCartFromFavorites(name, price, image) {
   // Add to cart first
   addToCart(name, price, image);
-  
+
   // Find and remove from favorites
   const itemIndex = favorites.findIndex(item => item.name === name);
   if (itemIndex !== -1) {
@@ -287,9 +291,9 @@ function showAddToFavoritesFeedback(productName) {
     font-family: var(--ff-jost);
   `;
   feedback.textContent = `${productName} adicionado aos favoritos!`;
-  
+
   document.body.appendChild(feedback);
-  
+
   setTimeout(() => {
     document.body.removeChild(feedback);
   }, 2000);
@@ -324,7 +328,7 @@ function renderProducts() {
   container.innerHTML = productsData.map(product => {
     const isFavorited = isProductInFavorites(product.name);
     const heartIcon = isFavorited ? 'heart' : 'heart-outline';
-    
+
     return `
     <li>
       <div class="product-card">
@@ -362,7 +366,7 @@ function renderProducts() {
 }
 
 // Initialize cart count, favorites count and load products when page loads
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   updateCartCount();
   updateFavoritesCount();
   loadProducts();
