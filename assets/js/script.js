@@ -71,8 +71,9 @@ function closeCart() {
 
 // Variáveis temporárias para armazenar dados do novo item
 let pendingCartItem = null;
+let isItemFromFavorites = false;
 
-function addToCart(name, price, image) {
+function addToCart(name, price, image, fromFavorites = false) {
   // Verifica se já existe um item no carrinho
   if (cart.length > 0) {
     // Armazena os dados do novo item temporariamente
@@ -82,6 +83,9 @@ function addToCart(name, price, image) {
       image: image,
       quantity: 1
     };
+    
+    // Marca se o item veio dos favoritos
+    isItemFromFavorites = fromFavorites;
     
     // Mostra o modal de confirmação
     showSingleItemModal(cart[0].name, name);
@@ -99,6 +103,18 @@ function addToCart(name, price, image) {
 
     // Show success feedback
     showAddToCartFeedback(name);
+    
+    // Se veio dos favoritos, remove da lista de favoritos
+    if (fromFavorites) {
+      const itemIndex = favorites.findIndex(item => item.name === name);
+      if (itemIndex !== -1) {
+        favorites.splice(itemIndex, 1);
+        localStorage.setItem('favoritesList', JSON.stringify(favorites));
+        updateFavoritesCount();
+        renderFavoritesItems();
+        renderProducts(); // Update heart icons on main page
+      }
+    }
   }
 }
 
@@ -208,6 +224,7 @@ function closeSingleItemModal() {
   
   // Limpa os dados temporários
   pendingCartItem = null;
+  isItemFromFavorites = false;
 }
 
 function confirmReplaceItem() {
@@ -217,6 +234,18 @@ function confirmReplaceItem() {
     
     localStorage.setItem('shoppingCart', JSON.stringify(cart));
     updateCartCount();
+    
+    // Se o item veio dos favoritos, remove da lista de favoritos
+    if (isItemFromFavorites) {
+      const itemIndex = favorites.findIndex(item => item.name === pendingCartItem.name);
+      if (itemIndex !== -1) {
+        favorites.splice(itemIndex, 1);
+        localStorage.setItem('favoritesList', JSON.stringify(favorites));
+        updateFavoritesCount();
+        renderFavoritesItems();
+        renderProducts(); // Update heart icons on main page
+      }
+    }
     
     // Mostra feedback de sucesso
     showAddToCartFeedback(pendingCartItem.name);
@@ -330,18 +359,8 @@ function renderFavoritesItems() {
 }
 
 function addToCartFromFavorites(name, price, image) {
-  // Add to cart first
-  addToCart(name, price, image);
-
-  // Find and remove from favorites
-  const itemIndex = favorites.findIndex(item => item.name === name);
-  if (itemIndex !== -1) {
-    favorites.splice(itemIndex, 1);
-    localStorage.setItem('favoritesList', JSON.stringify(favorites));
-    updateFavoritesCount();
-    renderFavoritesItems();
-    renderProducts(); // Update heart icons on main page
-  }
+  // Add to cart with fromFavorites flag
+  addToCart(name, price, image, true);
 }
 
 function showAddToFavoritesFeedback(productName) {
@@ -432,8 +451,40 @@ function renderProducts() {
   }).join('');
 }
 
-// Initialize cart count, favorites count and load products when page loads
+/**
+ * Smooth scrolling and navbar navigation
+ */
+
+// Add smooth scrolling for anchor links
 document.addEventListener('DOMContentLoaded', function() {
+  // Enable smooth scrolling for all anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const href = this.getAttribute('href');
+      
+      // Only handle internal anchor links, not javascript:void(0)
+      if (href !== '#' && href.startsWith('#')) {
+        e.preventDefault();
+        
+        const target = document.querySelector(href);
+        if (target) {
+          // Close navbar if it's open (for mobile)
+          if (navbar.classList.contains('active')) {
+            navbar.classList.remove('active');
+            overlay.classList.remove('active');
+          }
+          
+          // Smooth scroll to target
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      }
+    });
+  });
+
+  // Initialize cart count, favorites count and load products
   updateCartCount();
   updateFavoritesCount();
   loadProducts();

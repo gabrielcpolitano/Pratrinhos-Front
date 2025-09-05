@@ -107,11 +107,11 @@
           </li>
 
           <li>
-            <a href="#" class="navbar-link">Presentes</a>
+            <a href="#presentes" class="navbar-link">Presentes</a>
           </li>
 
           <li>
-            <a href="#" class="navbar-link">Favoritos</a>
+            <a href="javascript:void(0)" class="navbar-link" onclick="openFavorites()">Favoritos</a>
           </li>
 
 
@@ -166,7 +166,7 @@
   <!-- 
                                               - #SINGLE ITEM MODAL
                                             -->
-  <div class="fixed inset-0 bg-black bg-opacity-50 opacity-0 pointer-events-none transition-opacity duration-300 z-50"
+  <div class="fixed inset-0 bg-black bg-opacity-50 opacity-0 pointer-events-none transition-opacity duration-300 z-[1100]"
     id="single-item-modal-overlay">
     <div class="fixed inset-0 flex items-center justify-center p-4">
       <div
@@ -297,7 +297,7 @@
                                                   - #PRODUCT
                                                 -->
 
-      <section class="section product">
+      <section class="section product" id="presentes">
         <div class="container">
 
           <h2 class="h2 section-title">Lista de itens que precisamos</h2>
