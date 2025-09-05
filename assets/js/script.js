@@ -47,7 +47,7 @@ function updateCartCount() {
 function openCart() {
   const cartOverlay = document.getElementById('cart-overlay');
   const shoppingCart = document.getElementById('shopping-cart');
-  
+
   if (cartOverlay && shoppingCart) {
     cartOverlay.classList.remove('opacity-0', 'pointer-events-none');
     cartOverlay.classList.add('opacity-100');
@@ -60,7 +60,7 @@ function openCart() {
 function closeCart() {
   const cartOverlay = document.getElementById('cart-overlay');
   const shoppingCart = document.getElementById('shopping-cart');
-  
+
   if (cartOverlay && shoppingCart) {
     cartOverlay.classList.add('opacity-0', 'pointer-events-none');
     cartOverlay.classList.remove('opacity-100');
@@ -69,25 +69,37 @@ function closeCart() {
   }
 }
 
+// Variáveis temporárias para armazenar dados do novo item
+let pendingCartItem = null;
+
 function addToCart(name, price, image) {
-  const existingItem = cart.find(item => item.name === name);
-  
-  if (existingItem) {
-    existingItem.quantity += 1;
-  } else {
-    cart.push({
+  // Verifica se já existe um item no carrinho
+  if (cart.length > 0) {
+    // Armazena os dados do novo item temporariamente
+    pendingCartItem = {
       name: name,
       price: parseFloat(price),
       image: image,
       quantity: 1
-    });
+    };
+    
+    // Mostra o modal de confirmação
+    showSingleItemModal(cart[0].name, name);
+  } else {
+    // Adiciona o primeiro item normalmente
+    cart = [{
+      name: name,
+      price: parseFloat(price),
+      image: image,
+      quantity: 1
+    }];
+
+    localStorage.setItem('shoppingCart', JSON.stringify(cart));
+    updateCartCount();
+
+    // Show success feedback
+    showAddToCartFeedback(name);
   }
-  
-  localStorage.setItem('shoppingCart', JSON.stringify(cart));
-  updateCartCount();
-  
-  // Show success feedback
-  showAddToCartFeedback(name);
 }
 
 function removeFromCart(index) {
@@ -100,17 +112,17 @@ function removeFromCart(index) {
 function renderCartItems() {
   const cartItems = document.getElementById('cart-items');
   const cartTotal = document.getElementById('cart-total');
-  
+
   if (!cartItems || !cartTotal) return;
-  
+
   if (cart.length === 0) {
     cartItems.innerHTML = '<div class="text-center py-8 text-gray-500">Seu carrinho está vazio</div>';
     cartTotal.textContent = 'R$ 0,00';
     // Don't return - let the footer still render
   } else {
-  
+
   let totalPrice = 0;
-  
+
   cartItems.innerHTML = cart.map((item, index) => {
     totalPrice += item.price * item.quantity;
     return `
@@ -127,7 +139,7 @@ function renderCartItems() {
       </div>
     `;
   }).join('');
-  
+
   cartTotal.textContent = `R$ ${totalPrice.toFixed(2).replace('.', ',')}`;
   }
 }
@@ -152,12 +164,66 @@ function showAddToCartFeedback(productName) {
     font-family: var(--ff-jost);
   `;
   feedback.textContent = `Adicionado ao Carrinho!`;
-  
+
   document.body.appendChild(feedback);
-  
+
   setTimeout(() => {
     document.body.removeChild(feedback);
   }, 500);
+}
+
+/**
+ * Single Item Modal functionality
+ */
+
+function showSingleItemModal(currentItemName, newItemName) {
+  const modalOverlay = document.getElementById('single-item-modal-overlay');
+  const modal = document.getElementById('single-item-modal');
+  const currentItemElement = document.getElementById('current-item-name');
+  const newItemElement = document.getElementById('new-item-name');
+  
+  if (modalOverlay && modal && currentItemElement && newItemElement) {
+    // Preenche os nomes dos itens
+    currentItemElement.textContent = currentItemName;
+    newItemElement.textContent = newItemName;
+    
+    // Mostra o modal
+    modalOverlay.classList.remove('opacity-0', 'pointer-events-none');
+    modalOverlay.classList.add('opacity-100');
+    modal.classList.remove('scale-95');
+    modal.classList.add('scale-100');
+  }
+}
+
+function closeSingleItemModal() {
+  const modalOverlay = document.getElementById('single-item-modal-overlay');
+  const modal = document.getElementById('single-item-modal');
+  
+  if (modalOverlay && modal) {
+    modalOverlay.classList.add('opacity-0', 'pointer-events-none');
+    modalOverlay.classList.remove('opacity-100');
+    modal.classList.add('scale-95');
+    modal.classList.remove('scale-100');
+  }
+  
+  // Limpa os dados temporários
+  pendingCartItem = null;
+}
+
+function confirmReplaceItem() {
+  if (pendingCartItem) {
+    // Substitui o item no carrinho
+    cart = [pendingCartItem];
+    
+    localStorage.setItem('shoppingCart', JSON.stringify(cart));
+    updateCartCount();
+    
+    // Mostra feedback de sucesso
+    showAddToCartFeedback(pendingCartItem.name);
+    
+    // Fecha o modal
+    closeSingleItemModal();
+  }
 }
 
 /**
@@ -176,7 +242,7 @@ function updateFavoritesCount() {
 function openFavorites() {
   const favoritesOverlay = document.getElementById('favorites-overlay');
   const favoritesSidebar = document.getElementById('favorites-sidebar');
-  
+
   if (favoritesOverlay && favoritesSidebar) {
     favoritesOverlay.classList.remove('opacity-0', 'pointer-events-none');
     favoritesOverlay.classList.add('opacity-100');
@@ -189,7 +255,7 @@ function openFavorites() {
 function closeFavorites() {
   const favoritesOverlay = document.getElementById('favorites-overlay');
   const favoritesSidebar = document.getElementById('favorites-sidebar');
-  
+
   if (favoritesOverlay && favoritesSidebar) {
     favoritesOverlay.classList.add('opacity-0', 'pointer-events-none');
     favoritesOverlay.classList.remove('opacity-100');
@@ -204,7 +270,7 @@ function isProductInFavorites(productName) {
 
 function toggleFavorite(name, price, image) {
   const existingItem = favorites.find(item => item.name === name);
-  
+
   if (existingItem) {
     // Remove from favorites
     const itemIndex = favorites.findIndex(item => item.name === name);
@@ -218,7 +284,7 @@ function toggleFavorite(name, price, image) {
     });
     showAddToFavoritesFeedback(name);
   }
-  
+
   localStorage.setItem('favoritesList', JSON.stringify(favorites));
   updateFavoritesCount();
   renderProducts(); // Re-render to update heart icons
@@ -238,9 +304,9 @@ function removeFromFavorites(index) {
 
 function renderFavoritesItems() {
   const favoritesItems = document.getElementById('favorites-items');
-  
+
   if (!favoritesItems) return;
-  
+
   if (favorites.length === 0) {
     favoritesItems.innerHTML = '<div class="text-center py-8 text-gray-500">Sua lista de favoritos está vazia</div>';
   } else {
@@ -266,7 +332,7 @@ function renderFavoritesItems() {
 function addToCartFromFavorites(name, price, image) {
   // Add to cart first
   addToCart(name, price, image);
-  
+
   // Find and remove from favorites
   const itemIndex = favorites.findIndex(item => item.name === name);
   if (itemIndex !== -1) {
@@ -292,9 +358,9 @@ function showAddToFavoritesFeedback(productName) {
     font-family: var(--ff-jost);
   `;
   feedback.textContent = `Adicionado aos Favoritos!`;
-  
+
   document.body.appendChild(feedback);
-  
+
   setTimeout(() => {
     document.body.removeChild(feedback);
   }, 500);
@@ -329,7 +395,7 @@ function renderProducts() {
   container.innerHTML = productsData.map(product => {
     const isFavorited = isProductInFavorites(product.name);
     const heartIcon = isFavorited ? 'heart' : 'heart-outline';
-    
+
     return `
     <li>
       <div class="product-card">
