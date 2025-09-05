@@ -2,8 +2,8 @@
   "products": [
     {
       "id": 1,
-      "name": "Sofá 2 Lugares",
-      "price": 1275,
+      "name": "Sofá Cama Retrátil",
+      "price": 1475,
       "image": "./assets/images/product-1.jpg",
       "category": "Acessórios",
       "featured": true,
@@ -11,12 +11,21 @@
     },
     {
       "id": 2,
-      "name": "Fogão 5 bocas",
+      "name": "Fogão 4 Bocas",
       "price": 1548.75,
       "image": "./assets/images/product-2.jpg",
-      "category": "Roupas",
+      "category": "Acessórios",
       "featured": true,
       "checkoutLink": "https://mpago.li/2t2CcYE"
+    },
+    {
+      "id": 2,
+      "name": "Lava e Seca",
+      "price": 3850.00,
+      "image": "./assets/images/product-3.jpg",
+      "category": "Acessórios",
+      "featured": true,
+      "checkoutLink": "https://mpago.li/2fhzdZh"
     }
   ]
 }
