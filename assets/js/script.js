@@ -171,7 +171,7 @@ function renderCartItems() {
         <div class="flex-1 min-w-0">
           <h4 class="font-medium text-gray-800 text-sm leading-tight">${item.name}</h4>
           <p class="font-semibold text-gray-900 mt-1">${formatPrice(item.price)}</p>
-          <p class="text-xs text-gray-500 mt-1">Em até 12x sem juros no Crédito / Cartão de Débito / Pix</p>
+          <p class="text-xs text-gray-500 mt-1">Em até 12x no cartão de crédito</p>
         </div>
         <div class="flex-shrink-0">
           <button class="text-blue-500 hover:text-blue-700 text-sm font-medium transition-colors" onclick="removeFromCart(${index})">Excluir</button>
@@ -376,7 +376,7 @@ function renderFavoritesItems() {
           <div class="flex-1 min-w-0">
             <h4 class="font-semibold text-gray-800 text-sm leading-tight mb-2">${item.name}</h4>
             <p class="text-lg font-bold text-gray-900 mb-1">${formatPrice(item.price)}</p>
-            <p class="text-xs text-green-600 mb-3">em 12x sem juros</p>
+            <p class="text-xs text-green-600 mb-3">em até 12x no crédito</p>
             <button class="bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium py-2 px-4 rounded-lg transition-colors w-full mb-2" onclick="addToCartFromFavorites('${item.name}', '${item.price}', '${item.image}', '${item.checkoutLink || ""}')">
               Adicionar ao Carrinho
             </button>
@@ -470,7 +470,7 @@ function renderProducts() {
 
           <div class="card-price">
             <data value="${product.price}">${formatPrice(product.price)}</data>
-            <data style="color:green">em até 12x sem juros</data>
+            <data style="color:green">em até 12x no crédito</data>
           </div>
         </div>
       </div>

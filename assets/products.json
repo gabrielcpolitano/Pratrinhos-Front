@@ -2,39 +2,30 @@
   "products": [
     {
       "id": 1,
-      "name": "Sofá Cama Retrátil",
-      "price": 1475,
+      "name": "Sofá sem Caixa Retrátil e Reclinável 2,00m com Molas Kiara Linho Adonai Estofados Cinza",
+      "price": 1299.90,
       "image": "./assets/images/product-1.jpg",
       "category": "Acessórios",
       "featured": true,
-      "checkoutLink": "https://mpago.li/1wxJSsT"
+      "checkoutLink": "https://mpago.la/1SoXnuN"
     },
     {
       "id": 2,
-      "name": "Fogão 4 Bocas",
-      "price": 1548.75,
+      "name": "Fogão 4 bocas Dako Supreme Timer Glass Titanium com mesa de vidro Bivolt",
+      "price": 850.75,
       "image": "./assets/images/product-2.jpg",
       "category": "Acessórios",
       "featured": true,
-      "checkoutLink": "https://mpago.li/2t2CcYE"
+      "checkoutLink": "https://mpago.la/2EGKCe6"
     },
     {
       "id": 3,
-      "name": "Lava e Seca",
-      "price": 3850.00,
-      "image": "./assets/images/product-3.jpg",
-      "category": "Acessórios",
-      "featured": true,
-      "checkoutLink": "https://mpago.li/2fhzdZh"
-    },
-    {
-      "id": 4,
-      "name": "Panela de Pressão Eletrica",
-      "price": 548.00,
+      "name": "Panela De Pressão Elétrica Multi Digital Hq 5l Inox Hq-y5di",
+      "price": 299.00,
       "image": "./assets/images/product-4.jpg",
       "category": "Acessórios",
       "featured": true,
-      "checkoutLink": "https://mpago.li/1hvVhuw"
+      "checkoutLink": "https://mpago.la/1kC8CuN"
     }
   ]
 }
