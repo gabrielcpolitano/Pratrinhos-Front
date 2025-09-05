@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagamento Realizado - Gabriel & Leliane</title>
+
+  <!-- 
+                                              - favicon
+                                            -->
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+
+  <!-- 
+                                              - tailwind css cdn
+                                            -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- 
+                                              - custom css link
+                                            -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <!-- 
+                                              - google font link
+                                            -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- 
+                                              - #HEADER
+                                            -->
+
+  <header class="header" data-header>
+    <div class="container">
+
+      <div class="overlay" data-overlay></div>
+
+      <a href="index.html" class="logo">
+        <img src="./assets/images/logo.svg" alt="Casmart logo" width="130" height="31">
+      </a>
+
+      <nav class="navbar" data-navbar>
+
+        <div class="navbar-top">
+
+          <a href="index.html" class="logo">
+            <img src="./assets/images/logo.svg" alt="Casmart logo" width="130" height="31">
+          </a>
+
+          <button class="nav-close-btn" data-nav-close-btn aria-label="Close Menu">
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
+
+        </div>
+
+        <ul class="navbar-list">
+
+          <li>
+            <a href="index.html#home" class="navbar-link">Home</a>
+          </li>
+
+          <li>
+            <a href="index.html#presentes" class="navbar-link">Presentes</a>
+          </li>
+
+        </ul>
+
+      </nav>
+
+    </div>
+  </header>
+
+  <main>
+    <article>
+
+      <!-- 
+                                                  - #SUCCESS
+                                                -->
+
+      <section class="section" style="min-height: 60vh; display: flex; align-items: center;">
+        <div class="container">
+          <div style="text-align: center; max-width: 600px; margin: 0 auto; padding: 60px 20px;">
+            
+            <!-- Success Icon -->
+            <div style="background: #27AE60; width: 100px; height: 100px; border-radius: 50%; margin: 0 auto 40px; display: flex; align-items: center; justify-content: center;">
+              <ion-icon name="checkmark-outline" style="font-size: 60px; color: white;"></ion-icon>
+            </div>
+
+            <!-- Success Message -->
+            <h1 class="h1" style="color: var(--eerie-black); margin-bottom: 20px;">
+              Pagamento Realizado com Sucesso!
+            </h1>
+
+            <p style="font-size: var(--fs-5); color: var(--sonic-silver); margin-bottom: 15px; line-height: 1.6;">
+              Obrigado por presentear Gabriel & Leliane!
+            </p>
+
+            <p style="font-size: var(--fs-7); color: var(--sonic-silver); margin-bottom: 40px; line-height: 1.6;">
+              Seu presente foi registrado com sucesso. Os noivos ficaram muito felizes com sua generosidade.
+            </p>
+
+            <!-- Success Details -->
+            <div style="background: var(--cultured); padding: 30px; border-radius: 10px; margin-bottom: 40px; text-align: left;">
+              <h3 class="h3" style="margin-bottom: 20px; color: var(--eerie-black);">Detalhes do Presente</h3>
+              <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <span style="color: var(--sonic-silver);">Status:</span>
+                <span style="color: var(--ocean-green); font-weight: var(--fw-600);">✓ Confirmado</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <span style="color: var(--sonic-silver);">Data:</span>
+                <span style="color: var(--eerie-black); font-weight: var(--fw-500);" id="current-date"></span>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span style="color: var(--sonic-silver);">Método de Pagamento:</span>
+                <span style="color: var(--eerie-black); font-weight: var(--fw-500);">Processado com Segurança</span>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+              <a href="index.html" class="btn btn-primary">
+                Voltar ao Início
+              </a>
+              
+              <a href="index.html#presentes" class="btn btn-outline">
+                Ver Mais Presentes
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <footer class="footer">
+
+    <div class="footer-top">
+      <div class="container">
+
+        <div class="footer-brand">
+
+          <a href="index.html" class="logo">
+            <img src="./assets/images/logo.svg" alt="Casmart logo">
+          </a>
+
+          <p class="footer-text">
+            Obrigado por fazer parte desta celebração especial. Gabriel & Leliane agradecem sua presença e generosidade.
+          </p>
+
+          <ul class="social-list">
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+
+        <p class="copyright">
+          &copy; 2025 Gabriel & Leliane - Todos os Direitos Reservados
+        </p>
+
+        <div class="payment">
+          <p class="payment-title">Pagamento Seguro</p>
+
+          <img src="./assets/images/payment-img.png" alt="Métodos de pagamento seguros" class="payment-img">
+        </div>
+
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- 
+                                              - custom js link
+                                            -->
+  <script>
+    // Set current date and clear cart
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set current date
+      const now = new Date();
+      const dateStr = now.toLocaleDateString('pt-BR', { 
+        day: '2-digit', 
+        month: '2-digit', 
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+      const dateElement = document.getElementById('current-date');
+      if (dateElement) {
+        dateElement.textContent = dateStr;
+      }
+
+      // Clear cart from localStorage
+      localStorage.removeItem('shoppingCart');
+      
+      // Also clear favorites if needed
+      // localStorage.removeItem('favoritesList');
+    });
+  </script>
+
+  <!-- 
+                                              - ionicon link
+                                            -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>
