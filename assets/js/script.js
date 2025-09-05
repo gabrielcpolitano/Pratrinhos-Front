@@ -149,7 +149,7 @@ function renderCartItems() {
         <div class="flex-1 min-w-0">
           <h4 class="font-medium text-gray-800 text-sm leading-tight">${item.name}</h4>
           <p class="font-semibold text-gray-900 mt-1">R$ ${item.price.toFixed(2).replace('.', ',')}</p>
-          <p class="text-xs text-gray-500 mt-1">Em até 12x sem juros no Crédito ou Cartão de Débito ou Pix</p>
+          <p class="text-xs text-gray-500 mt-1">Em até 12x sem juros no Crédito / Cartão de Débito / Pix</p>
         </div>
         <div class="flex-shrink-0">
           <button class="text-blue-500 hover:text-blue-700 text-sm font-medium transition-colors" onclick="removeFromCart(${index})">Excluir</button>
