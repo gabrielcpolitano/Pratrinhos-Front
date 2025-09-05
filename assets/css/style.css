@@ -223,7 +223,6 @@ h3 > a { color: inherit; }
  * #HEADER
 \*-----------------------------------*/
 
-.header-search { display: none; }
 
 .header {
   position: absolute;
@@ -1068,39 +1067,24 @@ h3 > a { color: inherit; }
   }
 
   .header .container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-  }
-
-  .header-search {
-    display: block;
     position: relative;
-    width: max-content;
   }
 
-  .header-search .input-field {
-    border: 1px solid hsla(0, 0%, 0%, 0.1);
-    width: 280px;
-    padding: 12px 30px;
-    border-radius: 6px;
-    transition: var(--transition-1);
-  }
-
-  .header-search .input-field:focus { outline: 1px solid var(--eerie-black); }
-
-  .header-search .search-btn {
+  .header .logo { 
     position: absolute;
-    top: 50%;
-    right: 15px;
-    transform: translateY(-50%);
-    font-size: 20px;
-    color: var(--eerie-black);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
   }
 
-  .header-search .search-btn ion-icon { --ionicon-stroke-width: 30px; }
-
-  .header .logo { margin-inline: auto; }
+  /* Cria um espaço vazio do lado esquerdo para equilibrar o layout */
+  .header .container::before {
+    content: '';
+    flex: 1;
+  }
 
   .nav-open-btn,
   .navbar-top,
@@ -1239,7 +1223,6 @@ h3 > a { color: inherit; }
    * HEADER
    */
 
-  .header-search .input-field { width: 350px; }
 
 
 
