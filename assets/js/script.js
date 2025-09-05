@@ -427,9 +427,7 @@ function renderProducts() {
     <li>
       <div class="product-card">
         <figure class="card-banner">
-          <a href="#">
-            <img src="${product.image}" alt="${product.name}" loading="lazy" width="800" height="1034" class="w-100">
-          </a>
+          <img src="${product.image}" alt="${product.name}" loading="lazy" width="800" height="1034" class="w-100">
 
           <div class="card-actions">
             <button class="card-action-btn cart-btn" onclick="addToCart('${product.name}', '${product.price}', '${product.image}', '${product.checkoutLink}')">
