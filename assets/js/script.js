@@ -445,12 +445,12 @@ function renderProducts() {
 
         <div class="card-content">
           <h3 class="h4 card-title">
-            <a href="#">${product.name}</a>
+            ${product.name}
           </h3>
 
           <div class="card-price">
             <data value="${product.price}">R$ ${product.price.toFixed(2).replace('.', ',')}</data>
-            <data>Em até 12x sem juros</data>
+            <data style="color:green">em até 12x sem juros</data>
           </div>
         </div>
       </div>
