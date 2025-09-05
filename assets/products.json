@@ -6,7 +6,8 @@
       "price": 48.75,
       "image": "./assets/images/product-1.jpg",
       "category": "Acessórios",
-      "featured": true
+      "featured": true,
+      "checkoutLink": "https://mpago.la/1sF7PSC"
     },
     {
       "id": 2,
@@ -14,7 +15,8 @@
       "price": 48.75,
       "image": "./assets/images/product-2.jpg",
       "category": "Roupas",
-      "featured": true
+      "featured": true,
+      "checkoutLink": "https://mpago.la/2D4E5F"
     },
     {
       "id": 3,
@@ -22,7 +24,8 @@
       "price": 125.50,
       "image": "./assets/images/product-3.jpg",
       "category": "Roupas",
-      "featured": true
+      "featured": true,
+      "checkoutLink": "https://mpago.la/3G6H7I"
     },
     {
       "id": 4,
@@ -30,7 +33,8 @@
       "price": 89.99,
       "image": "./assets/images/product-4.jpg",
       "category": "Acessórios",
-      "featured": true
+      "featured": true,
+      "checkoutLink": "https://mpago.la/4J8K9L"
     },
     {
       "id": 5,
@@ -38,7 +42,8 @@
       "price": 67.25,
       "image": "./assets/images/product-5.jpg",
       "category": "Acessórios",
-      "featured": true
+      "featured": true,
+      "checkoutLink": "https://mpago.la/5M0N1O"
     },
     {
       "id": 6,
@@ -46,7 +51,8 @@
       "price": 156.80,
       "image": "./assets/images/product-6.jpg",
       "category": "Calçados",
-      "featured": true
+      "featured": true,
+      "checkoutLink": "https://mpago.la/6P2Q3R"
     },
     {
       "id": 7,
@@ -54,7 +60,8 @@
       "price": 198.45,
       "image": "./assets/images/product-7.jpg",
       "category": "Roupas",
-      "featured": true
+      "featured": true,
+      "checkoutLink": "https://mpago.la/7S4T5U"
     },
     {
       "id": 8,
@@ -62,7 +69,8 @@
       "price": 78.90,
       "image": "./assets/images/product-8.jpg",
       "category": "Acessórios",
-      "featured": true
+      "featured": true,
+      "checkoutLink": "https://mpago.la/8V6W7X"
     },
     {
       "id": 9,
@@ -70,7 +78,8 @@
       "price": 95.50,
       "image": "./assets/images/product-9.jpg",
       "category": "Roupas",
-      "featured": true
+      "featured": true,
+      "checkoutLink": "https://mpago.la/9Y8Z1A"
     },
     {
       "id": 10,
@@ -78,7 +87,8 @@
       "price": 143.75,
       "image": "./assets/images/product-10.jpg",
       "category": "Eletrônicos",
-      "featured": true
+      "featured": true,
+      "checkoutLink": "https://mpago.la/0B2C3D"
     }
   ]
 }

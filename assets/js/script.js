@@ -73,7 +73,7 @@ function closeCart() {
 let pendingCartItem = null;
 let isItemFromFavorites = false;
 
-function addToCart(name, price, image, fromFavorites = false) {
+function addToCart(name, price, image, checkoutLink = null, fromFavorites = false) {
   // Verifica se já existe um item no carrinho
   if (cart.length > 0) {
     // Armazena os dados do novo item temporariamente
@@ -81,6 +81,7 @@ function addToCart(name, price, image, fromFavorites = false) {
       name: name,
       price: parseFloat(price),
       image: image,
+      checkoutLink: checkoutLink,
       quantity: 1
     };
     
@@ -95,6 +96,7 @@ function addToCart(name, price, image, fromFavorites = false) {
       name: name,
       price: parseFloat(price),
       image: image,
+      checkoutLink: checkoutLink,
       quantity: 1
     }];
 
@@ -161,7 +163,12 @@ function renderCartItems() {
 }
 
 function continueShopping() {
-  alert('Redirecionando para o checkout...');
+  if (cart.length > 0 && cart[0].checkoutLink) {
+    // Redireciona para o link de checkout do produto
+    window.open(cart[0].checkoutLink, '_blank');
+  } else {
+    alert('Link de checkout não disponível.');
+  }
   closeCart();
 }
 
@@ -297,7 +304,7 @@ function isProductInFavorites(productName) {
   return favorites.some(item => item.name === productName);
 }
 
-function toggleFavorite(name, price, image) {
+function toggleFavorite(name, price, image, checkoutLink = null) {
   const existingItem = favorites.find(item => item.name === name);
 
   if (existingItem) {
@@ -309,7 +316,8 @@ function toggleFavorite(name, price, image) {
     favorites.push({
       name: name,
       price: parseFloat(price),
-      image: image
+      image: image,
+      checkoutLink: checkoutLink
     });
     showAddToFavoritesFeedback(name);
   }
@@ -319,8 +327,8 @@ function toggleFavorite(name, price, image) {
   renderProducts(); // Re-render to update heart icons
 }
 
-function addToFavorites(name, price, image) {
-  toggleFavorite(name, price, image);
+function addToFavorites(name, price, image, checkoutLink = null) {
+  toggleFavorite(name, price, image, checkoutLink);
 }
 
 function removeFromFavorites(index) {
@@ -347,7 +355,7 @@ function renderFavoritesItems() {
             <h4 class="font-semibold text-gray-800 text-sm leading-tight mb-2">${item.name}</h4>
             <p class="text-lg font-bold text-gray-900 mb-1">R$ ${item.price.toFixed(2).replace('.', ',')}<sup class="text-xs">99</sup></p>
             <p class="text-xs text-green-600 mb-3">em 12x sem juros</p>
-            <button class="bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium py-2 px-4 rounded-lg transition-colors w-full mb-2" onclick="addToCartFromFavorites('${item.name}', '${item.price}', '${item.image}')">
+            <button class="bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium py-2 px-4 rounded-lg transition-colors w-full mb-2" onclick="addToCartFromFavorites('${item.name}', '${item.price}', '${item.image}', '${item.checkoutLink || ""}')">
               Adicionar ao Carrinho
             </button>
           </div>
@@ -358,9 +366,9 @@ function renderFavoritesItems() {
   }
 }
 
-function addToCartFromFavorites(name, price, image) {
+function addToCartFromFavorites(name, price, image, checkoutLink = null) {
   // Add to cart with fromFavorites flag
-  addToCart(name, price, image, true);
+  addToCart(name, price, image, checkoutLink, true);
 }
 
 function showAddToFavoritesFeedback(productName) {
@@ -424,12 +432,12 @@ function renderProducts() {
           </a>
 
           <div class="card-actions">
-            <button class="card-action-btn cart-btn" onclick="addToCart('${product.name}', '${product.price}', '${product.image}')">
+            <button class="card-action-btn cart-btn" onclick="addToCart('${product.name}', '${product.price}', '${product.image}', '${product.checkoutLink}')">
               <ion-icon name="bag-handle-outline" aria-hidden="true"></ion-icon>
               <p>Adicionar ao Carrinho</p>
             </button>
 
-            <button class="card-action-btn favorite-btn" onclick="addToFavorites('${product.name}', '${product.price}', '${product.image}')">
+            <button class="card-action-btn favorite-btn" onclick="addToFavorites('${product.name}', '${product.price}', '${product.image}', '${product.checkoutLink}')">
               <ion-icon name="${heartIcon}" aria-hidden="true"></ion-icon>
             </button>
           </div>
