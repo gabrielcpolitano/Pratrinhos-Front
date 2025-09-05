@@ -32,6 +32,28 @@ window.addEventListener("scroll", function () {
 })
 
 /**
+ * Price formatting function
+ */
+function formatPrice(price) {
+  const priceNum = parseFloat(price);
+  const reais = Math.floor(priceNum);
+  const centavos = Math.round((priceNum - reais) * 100);
+  
+  // Format thousands with dots
+  const formattedReais = reais.toLocaleString('pt-BR', {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).replace(/,/g, '.');
+  
+  // Only show cents if they're not zero
+  if (centavos === 0) {
+    return `R$ ${formattedReais}`;
+  } else {
+    return `R$ ${formattedReais}<sup class="text-xs">${centavos.toString().padStart(2, '0')}</sup>`;
+  }
+}
+
+/**
  * Shopping Cart functionality
  */
 
@@ -135,7 +157,7 @@ function renderCartItems() {
 
   if (cart.length === 0) {
     cartItems.innerHTML = '<div class="text-center py-8 text-gray-500">Seu carrinho está vazio</div>';
-    cartTotal.textContent = 'R$ 0,00';
+    cartTotal.innerHTML = formatPrice(0);
     // Don't return - let the footer still render
   } else {
 
@@ -148,7 +170,7 @@ function renderCartItems() {
         <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-lg flex-shrink-0">
         <div class="flex-1 min-w-0">
           <h4 class="font-medium text-gray-800 text-sm leading-tight">${item.name}</h4>
-          <p class="font-semibold text-gray-900 mt-1">R$ ${item.price.toFixed(2).replace('.', ',')}</p>
+          <p class="font-semibold text-gray-900 mt-1">${formatPrice(item.price)}</p>
           <p class="text-xs text-gray-500 mt-1">Em até 12x sem juros no Crédito / Cartão de Débito / Pix</p>
         </div>
         <div class="flex-shrink-0">
@@ -158,7 +180,7 @@ function renderCartItems() {
     `;
   }).join('');
 
-  cartTotal.textContent = `R$ ${totalPrice.toFixed(2).replace('.', ',')}`;
+  cartTotal.innerHTML = formatPrice(totalPrice);
   }
 }
 
@@ -353,7 +375,7 @@ function renderFavoritesItems() {
           <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded-lg flex-shrink-0">
           <div class="flex-1 min-w-0">
             <h4 class="font-semibold text-gray-800 text-sm leading-tight mb-2">${item.name}</h4>
-            <p class="text-lg font-bold text-gray-900 mb-1">R$ ${item.price.toFixed(2).replace('.', ',')}<sup class="text-xs">99</sup></p>
+            <p class="text-lg font-bold text-gray-900 mb-1">${formatPrice(item.price)}</p>
             <p class="text-xs text-green-600 mb-3">em 12x sem juros</p>
             <button class="bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium py-2 px-4 rounded-lg transition-colors w-full mb-2" onclick="addToCartFromFavorites('${item.name}', '${item.price}', '${item.image}', '${item.checkoutLink || ""}')">
               Adicionar ao Carrinho
@@ -447,7 +469,7 @@ function renderProducts() {
           </h3>
 
           <div class="card-price">
-            <data value="${product.price}">R$ ${product.price.toFixed(2).replace('.', ',')}</data>
+            <data value="${product.price}">${formatPrice(product.price)}</data>
             <data style="color:green">em até 12x sem juros</data>
           </div>
         </div>
