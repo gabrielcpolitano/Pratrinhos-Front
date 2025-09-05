@@ -19,13 +19,22 @@
       "checkoutLink": "https://mpago.li/2t2CcYE"
     },
     {
-      "id": 2,
+      "id": 3,
       "name": "Lava e Seca",
       "price": 3850.00,
       "image": "./assets/images/product-3.jpg",
       "category": "Acessórios",
       "featured": true,
       "checkoutLink": "https://mpago.li/2fhzdZh"
+    },
+    {
+      "id": 4,
+      "name": "Panela de Pressão Eletrica",
+      "price": 548.00,
+      "image": "./assets/images/product-4.jpg",
+      "category": "Acessórios",
+      "featured": true,
+      "checkoutLink": "https://mpago.li/1hvVhuw"
     }
   ]
 }
