@@ -73,13 +73,31 @@
       "checkoutLink": "https://mpago.la/1fu4f7j"
     },
     {
-      "id": 8,
-      "name": "Teste",
-      "price": 10.26,
+      "id": 9,
+      "name": "Panela Elétrica de Arroz Rizzo Elgin 5 Xícaras, 400W, 110v",
+      "price": 129.99,
       "image": "./assets/images/product-9.jpg",
       "category": "Acessórios",
       "featured": true,
-      "checkoutLink": "https://mpago.la/1JjMNAm"
+      "checkoutLink": "https://mpago.la/2Us4P7J"
+    },
+    {
+      "id": 10,
+      "name": "Fritadeira Sem Óleo Air Fryer 4l Mondial 1500W AFN-40-BFT",
+      "price": 277.85,
+      "image": "./assets/images/product-10.jpg",
+      "category": "Acessórios",
+      "featured": true,
+      "checkoutLink": "https://mpago.la/29bWsa3"
+    },
+    {
+      "id": 11,
+      "name": "Climatizador De Ar 3 Em 1 Wap Clima Control Digital Cor Branco",
+      "price": 526.16,
+      "image": "./assets/images/product-11.jpg",
+      "category": "Acessórios",
+      "featured": true,
+      "checkoutLink": "https://mpago.la/1mqTJqq"
     }
   ]
 }
