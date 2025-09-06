@@ -26,6 +26,60 @@
       "category": "Acessórios",
       "featured": true,
       "checkoutLink": "https://mpago.la/1kC8CuN"
+    },
+    {
+      "id": 4,
+      "name": "Guarda-Roupa Casal Madesa Reno 3 Portas de Correr com Espelho - Branco",
+      "price": 1274.12,
+      "image": "./assets/images/product-4.jpg",
+      "category": "Acessórios",
+      "featured": true,
+      "checkoutLink": "https://mpago.la/2EvdacK"
+    },
+    {
+      "id": 5,
+      "name": "Cama Box Casal Colchão Gazin Maximus Molas Ensacadas 138x188x62cm Linho Grafite / Preto",
+      "price": 975.10,
+      "image": "./assets/images/product-5.jpg",
+      "category": "Acessórios",
+      "featured": true,
+      "checkoutLink": "https://mpago.la/26SFh9A"
+    },
+    {
+      "id": 6,
+      "name": "Armário de Cozinha Completa Suspenso 240cm Cinza Nice Madesa 05",
+      "price": 1478.30,
+      "image": "./assets/images/product-6.jpg",
+      "category": "Acessórios",
+      "featured": true,
+      "checkoutLink": "https://mpago.la/32NtxSB"
+    },
+    {
+      "id": 7,
+      "name": "Gabinete Para Banheiro C/ Cuba E Espelho Jdm Ripado 3d",
+      "price": 399.15,
+      "image": "./assets/images/product-7.jpg",
+      "category": "Acessórios",
+      "featured": true,
+      "checkoutLink": "https://mpago.la/1AQrKsN"
+    },
+    {
+      "id": 8,
+      "name": "Microondas Panasonic Nn-st27lwru 21L Branco Espelhado Tecnologia Pega Fácil",
+      "price": 525.26,
+      "image": "./assets/images/product-8.jpg",
+      "category": "Acessórios",
+      "featured": true,
+      "checkoutLink": "https://mpago.la/1fu4f7j"
+    },
+    {
+      "id": 8,
+      "name": "Teste",
+      "price": 10.26,
+      "image": "./assets/images/product-9.jpg",
+      "category": "Acessórios",
+      "featured": true,
+      "checkoutLink": "https://mpago.la/1fu4f7j"
     }
   ]
 }
